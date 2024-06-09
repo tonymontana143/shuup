@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  grafana:
+    image: grafana/grafana-enterprise
+    volumes:
+      - grafana_volume:/var/lib/grafana
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-clock-panel
+    ports:
+      - 3000:3000
+volumes:
+  grafana_volume: {}
