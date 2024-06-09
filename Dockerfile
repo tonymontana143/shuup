@@ -24,7 +24,7 @@ ARG editable=0
 
 RUN if [ "$editable" -eq 1 ]; then pip3 install -r requirements-tests.txt && python3 setup.py build_resources; else pip3 install shuup; fi
 
-RUN pip install markupsafe==2.0.1
+# RUN pip install markupsafe==2.0.1
 
 RUN python3 -m shuup_workbench migrate
 RUN python3 -m shuup_workbench shuup_init
