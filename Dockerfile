@@ -20,14 +20,12 @@ WORKDIR /app
 
 # The dev compose file sets this to 1 to support development and editing the source code.
 # The default value of 0 just installs the demo for running.
+ARG editable=0
 
+RUN if [ "$editable" -eq 1 ]; then pip3 install -r requirements-tests.txt && python3 setup.py build_resources; else pip3 install shuup; fi
 
-# # ARG editable=0
-
-# RUN if [ "$editable" -eq 1 ]; then pip3 install -r requirements-tests.txt && python3 setup.py build_resources; else pip3 install shuup; fi
-
-# RUN pip install markupsafe==2.0.1
-
+RUN pip install markupsafe==2.0.1
+RUN pip install django-prometheus
 RUN python3 -m shuup_workbench migrate
 RUN python3 -m shuup_workbench shuup_init
 
